@@ -38,33 +38,41 @@ client.connect(err => {
       })
   });
 
-  app.get('/allRecommends', (req, res) =>{
-    moviesCollection.find({ type: "recommend"})
-    .toArray((err, recommends)=>{
-      res.send(recommends);
+  app.get('/allMovies', (req, res)=>{
+    moviesCollection.find({ type: req.query.type })
+    .toArray((err, documents)=>{
+      // console.log(err, documents)
+      res.send(documents);
     })
-  });
+  })
 
-  app.get('/allTrending', (req, res) =>{
-    moviesCollection.find({ type: "trending"})
-    .toArray((err, trendings)=>{
-      res.send(trendings);
-    })
-  });
+  // app.get('/allRecommends', (req, res) =>{
+  //   moviesCollection.find({ type: "recommend"})
+  //   .toArray((err, recommends)=>{
+  //     res.send(recommends);
+  //   })
+  // });
 
-  app.get('/allNew', (req, res) =>{
-    moviesCollection.find({ type: "new"})
-    .toArray((err, news)=>{
-      res.send(news);
-    })
-  });
+  // app.get('/allTrending', (req, res) =>{
+  //   moviesCollection.find({ type: "trending"})
+  //   .toArray((err, trendings)=>{
+  //     res.send(trendings);
+  //   })
+  // });
 
-  app.get('/allOriginals', (req, res) =>{
-    moviesCollection.find({ type: "original"})
-    .toArray((err, originals)=>{
-      res.send(originals);
-    })
-  });
+  // app.get('/allNew', (req, res) =>{
+  //   moviesCollection.find({ type: "new"})
+  //   .toArray((err, news)=>{
+  //     res.send(news);
+  //   })
+  // });
+
+  // app.get('/allOriginals', (req, res) =>{
+  //   moviesCollection.find({ type: "original"})
+  //   .toArray((err, originals)=>{
+  //     res.send(originals);
+  //   })
+  // });
 
   app.get('/details/:_id', (req, res)=>{
     moviesCollection.find({_id: ObjectID(req.params._id)})
